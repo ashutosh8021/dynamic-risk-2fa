@@ -1,0 +1,11 @@
+{
+  "alice": {
+    "password": "demo-password",
+    "email": "alice@example.com",
+    "known_ips": [],
+    "known_devices": [],
+    "lat": 12.9716,
+    "lon": 77.5946,
+    "failed_attempts": 0
+  }
+}
