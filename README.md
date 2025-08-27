@@ -87,15 +87,14 @@ Copy code
 4. OTP (if required) is printed in backend logs (demo).  
 
 **Sample Response (Medium Risk):**
-```json
-{
+
+
   "risk_level": "medium",
   "next_action": "send_otp",
   "explain": {
     "score": 45.2,
     "reasons": ["new IP", "unknown device"]
-  }
-}
+  
 
 
 
