@@ -1,111 +1,119 @@
-🚀 Dynamic Risk-based 2FA System
+# Dynamic Risk-Based Two-Factor Authentication (2FA) System
 
-Internship Project — Adaptive Two-Factor Authentication (2FA) based on user login risk
+**College Project Submission – IIT Patna**
 
-📌 Overview
+---
 
-This project implements a dynamic risk-based two-factor authentication system.
-Instead of enforcing OTP every time, the system assigns a risk score to each login attempt and adapts security:
+## 📌 Project Overview
 
-✅ Low risk → login success (no OTP)
+This project implements a **dynamic risk-based two-factor authentication (2FA) system** that adjusts security requirements based on the risk profile of a login attempt.  
 
-⚠️ Medium risk → OTP challenge
+- **Low risk** → Login succeeds with password only  
+- **Medium risk** → Requires One-Time Password (OTP)  
+- **High risk** → Flags for manual review  
 
-🔴 High risk → manual review required
+This ensures **strong security** without compromising **usability**.
 
-This balances security 🔒 with user convenience 🎯.
+---
 
-🏗️ Tech Stack
+## 🎯 Objectives
 
-Backend: FastAPI (Python)
+- To demonstrate how adaptive authentication can improve login security.  
+- To design and implement a **risk engine** for real-time decision-making.  
+- To integrate a **Streamlit frontend** with a **FastAPI backend**.  
+- To simulate real-world OTP-based verification.  
 
-Frontend: Streamlit
+---
 
-Database: SQLite / JSON (demo user storage)
+## 🛠 Tech Stack
 
-Risk Engine: Rules-based (with option for ML)
+- **Backend**: FastAPI (Python)  
+- **Frontend**: Streamlit  
+- **Database**: SQLite / JSON (demo)  
+- **OTP Service**: Console-based OTP (extendable to Email/SMS)  
+- **Risk Engine**: Rule-based (Machine Learning ready)  
 
-OTP: Email / Console log (demo)
 
-📂 Project Structure
-dynamic-2fa/
+
+## 📂 Project Structure
+
+
+dynamic-risk-2fa/
 ├─ backend/
-│  ├─ app.py           # FastAPI backend
-│  ├─ risk_engine.py   # Rules-based risk scoring
-│  ├─ otp_service.py   # OTP generation/verification
-│  ├─ db.py            # Simple demo user DB
-│  └─ requirements.txt
+│ ├─ app.py # FastAPI backend
+│ ├─ risk_engine.py # Risk scoring logic
+│ ├─ otp_service.py # OTP generator & verifier
+│ ├─ db.py # Demo user database
+│ └─ requirements.txt # Python dependencies
 ├─ frontend/
-│  └─ streamlit_app.py # Streamlit frontend
-└─ README.md           # Project documentation
+│ └─ streamlit_app.py # Streamlit front end
+└─ README.md # Documentation
 
-⚡ Setup Instructions
-1️⃣ Clone Repo & Setup Environment
-git clone https://github.com/your-username/dynamic-2fa.git
-cd dynamic-2fa
-python -m venv venv
-venv\Scripts\activate      # Windows
-source venv/bin/activate   # Linux/Mac
-pip install -r backend/requirements.txt
 
-2️⃣ Run Backend (FastAPI)
+
+## 🚀 How to Run
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/ashutosh8021/dynamic-risk-2fa.git
+cd dynamic-risk-2fa
+2. Setup Environment
+bash
+Copy code
 cd backend
+python -m venv venv
+source venv/bin/activate    # macOS/Linux
+venv\Scripts\activate.bat   # Windows
+pip install -r requirements.txt
+3. Run Backend (FastAPI)
+bash
+Copy code
 uvicorn app:app --reload --port 8000
+API Docs: http://localhost:8000/docs
 
-
-Backend will be available at 👉 http://localhost:8000/docs
-
-3️⃣ Run Frontend (Streamlit)
+4. Run Frontend (Streamlit)
+bash
+Copy code
 cd ../frontend
 streamlit run streamlit_app.py
+Frontend: http://localhost:8501
 
-
-Frontend will be available at 👉 http://localhost:8501
-
-🔑 Demo Login Flow
-
-Create demo user Alice from frontend.
-
-Login with:
-
+🔑 Demo Credentials
 Username: alice
 
 Password: demo-password
 
-Risk engine decides:
+Risk-based behavior:
 
-Low risk → Login success
+Low risk → Direct login
 
-Medium risk → OTP required (printed in backend logs, e.g., 123456)
+Medium risk → OTP required (printed in console)
 
 High risk → Manual review
 
-📸 Screenshots
-🟢 Login UI
+📊 Learning Outcomes
+Understanding adaptive authentication models
 
-⚠️ Medium Risk (OTP Challenge)
+Integration of FastAPI and Streamlit
 
-🔴 High Risk (Manual Review)
+Designing a rule-based risk engine
 
-🔒 Security Notes
+Implementing OTP-based verification
 
-Demo OTPs are printed to console (use email/SMS in production).
+Awareness of production-level security measures (TLS, secret storage, rate limiting)
 
-Risk scoring can be extended with ML models (RandomForest).
+📈 Future Scope
+Replace rule-based engine with ML-based risk prediction
 
-For production: use HTTPS, secure secret storage, and rate limiting.
+Add real OTP delivery (Email/SMS APIs like Twilio/SendGrid)
 
-🎯 Next Steps
+Enhance UI with dashboards for login analytics
 
-Add ML-based risk engine (model_train.py)
-
-Integrate real email/SMS OTP (Twilio, SendGrid, etc.)
-
-Extend user DB for multiple accounts
-
-Improve frontend UX with dashboards
+Extend DB for multi-user management
 
 👨‍💻 Author
-
 Ashutosh Kumar
-BS in Computer Science, IIT Patna
+B.S in Computer Science, IIT Patna
+
+📜 License
+This project is for academic purposes. For production use, please ensure compliance with security best practices.
