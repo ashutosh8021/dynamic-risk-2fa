@@ -1,7 +1,7 @@
-# Dynamic Risk-Based Two-Factor Authentication (2FA) System
+# 🔐 Dynamic Risk-Based Two-Factor Authentication (2FA) System
 
-**Adaptive Authentication with Contextual Risk Scoring**  
-📌 *College Project Submission – IIT Patna*  
+📌 **Adaptive Authentication with Contextual Risk Scoring**  
+📖 *College Project Submission – IIT Patna*  
 👨‍💻 Author: Ashutosh Kumar  
 
 ---
@@ -16,16 +16,16 @@ This project implements a **Dynamic Risk-Based 2FA System** that evaluates the r
 - 🔑 **Medium Risk** → Require One-Time Password (OTP)  
 - 🚨 **High Risk** → Block or flag for manual review  
 
-The goal is to balance **security** and **user experience** by applying friction only when necessary.
+The goal is to balance **security** 🔒 and **user experience** ⚡ by applying friction only when necessary.
 
 ---
 
 ## 🎯 Problem Statement
 
-- Static OTPs apply the same friction to all users → poor user experience  
+- Static OTPs apply the same friction to all users → poor UX  
 - Susceptible to **phishing, credential stuffing, SIM-swap attacks**  
 - Traditional systems ignore **contextual signals** (device, IP, geolocation, login time, velocity)  
-- Need for an **explainable, adaptive authentication system** that only challenges suspicious logins:contentReference[oaicite:0]{index=0}  
+- Need for an **explainable, adaptive authentication system** that only challenges suspicious logins  
 
 ---
 
@@ -33,14 +33,14 @@ The goal is to balance **security** and **user experience** by applying friction
 
 - A **rules-based risk engine** assigns weighted scores to features like IP change, device fingerprint, login time anomalies, distance from last location, and failed attempts.  
 - The **risk score** maps to actions:  
-  - Low (<30) → Allow  
-  - Medium (30–69) → OTP  
-  - High (≥70) → Manual review  
+  - 🟢 Low (<30) → Allow  
+  - 🟡 Medium (30–69) → OTP  
+  - 🔴 High (≥70) → Manual review  
 
-Benefits:  
+✨ **Benefits:**  
 - Fewer false alarms  
 - Reduced login friction for safe users  
-- Explainable decisions (transparent scoring)
+- Transparent & explainable scoring  
 
 ---
 
@@ -53,15 +53,8 @@ Benefits:
 | - Show responses | | - User Store (JSON/DB) |
 +-------------------+ +-------------------------+
 
-markdown
+yaml
 Copy code
-
-- **Frontend (Streamlit)**: login/OTP forms, risk visualization  
-- **Backend (FastAPI)**: APIs `/login`, `/verify_otp`, `/create_demo_user`  
-- **Core Components**:
-  - 🧠 **Risk Engine** – weighted rule scoring  
-  - 🔑 **OTP Service** – generates OTP (console, extendable to email/SMS)  
-  - 🗄 **User Store** – simple JSON (can be upgraded to SQLite/SQLModel)  
 
 ---
 
@@ -69,19 +62,17 @@ Copy code
 
 | Feature           | Description | Example Weight |
 |-------------------|-------------|----------------|
-| `ip_unknown`      | New IP for user | +40 |
-| `device_unknown`  | New device fingerprint | +30 |
-| `time_anomaly`    | Login at unusual time | +20 |
-| `geo_distance_km` | Distance from last location | +0.5/km |
-| `failed_attempts` | Recent failed logins | +10 each |
-| `velocity`        | Impossible travel speed | optional |
+| 🌐 `ip_unknown`   | New IP for user | +40 |
+| 💻 `device_unknown` | New device fingerprint | +30 |
+| ⏰ `time_anomaly` | Login at unusual time | +20 |
+| 📍 `geo_distance_km` | Distance from last location | +0.5/km |
+| ❌ `failed_attempts` | Recent failed logins | +10 each |
+| 🚀 `velocity`     | Impossible travel speed | optional |
 
 **Thresholds:**  
-- `<30` → Low Risk  
-- `30–69` → Medium Risk (OTP)  
-- `≥70` → High Risk (manual review)  
-
-Example: New IP (40) + New Device (30) + Geo Distance 50km (25) = **95 → High Risk**
+- `<30` → Low Risk ✅  
+- `30–69` → Medium Risk 🔑  
+- `≥70` → High Risk 🚨  
 
 ---
 
@@ -90,9 +81,9 @@ Example: New IP (40) + New Device (30) + Geo Distance 50km (25) = **95 → High 
 1. User submits **username + password + metadata** (IP, UA, location, timestamp).  
 2. Backend computes **risk features** & score.  
 3. System returns:  
-   - `low` → Success  
-   - `medium` → Generate & verify OTP  
-   - `high` → Block / manual review  
+   - ✅ Low → Success  
+   - 🔑 Medium → Generate & verify OTP  
+   - 🚨 High → Block / manual review  
 4. OTP (if required) is printed in backend logs (demo).  
 
 **Sample Response (Medium Risk):**
@@ -119,12 +110,12 @@ dynamic-risk-2fa/
 │  └─ streamlit_app.py    # Streamlit-based UI
 └─ README.md              # Documentation
 ⚙️ Setup & Running
-1. Clone the repo
+1️⃣ Clone the repo
 bash
 Copy code
 git clone https://github.com/ashutosh8021/dynamic-risk-2fa.git
 cd dynamic-risk-2fa
-2. Create virtual environment & install deps
+2️⃣ Create virtual environment & install deps
 bash
 Copy code
 cd backend
@@ -132,46 +123,46 @@ python -m venv venv
 source venv/bin/activate   # macOS/Linux
 venv\Scripts\activate.bat  # Windows
 pip install -r requirements.txt
-3. Run Backend
+3️⃣ Run Backend
 bash
 Copy code
 uvicorn app:app --reload --port 8000
-Docs → http://localhost:8000/docs
+API Docs → http://localhost:8000/docs
 
-4. Run Frontend
+4️⃣ Run Frontend
 bash
 Copy code
 cd ../frontend
 streamlit run streamlit_app.py
-Frontend → http://localhost:8501
+UI → http://localhost:8501
 
 🧪 Demo Instructions
 Create a demo user (alice) from the UI.
 
 Login with:
 
-Username: alice
+👤 Username: alice
 
-Password: demo-password
+🔑 Password: demo-password
 
-Vary metadata (IP, location, UA, time) to simulate:
+Change metadata (IP, location, UA, time) to simulate:
 
-Low → seamless login
+✅ Low → seamless login
 
-Medium → OTP required (check console)
+🔑 Medium → OTP required (check console)
 
-High → flagged
+🚨 High → flagged
 
 📊 Learning Outcomes
-Designed an adaptive authentication system.
+🛡 Designed an adaptive authentication system.
 
-Integrated FastAPI backend with Streamlit frontend.
+⚡ Integrated FastAPI backend with Streamlit frontend.
 
-Implemented a rules-based risk engine.
+🧠 Implemented a rules-based risk engine.
 
-Explored context-aware security models.
+🌍 Explored context-aware security models.
 
-Prepared system for future ML integration.
+🤖 Prepared system for future ML integration.
 
 🚀 Future Work
 🔒 Replace JSON store with SQLite/SQLModel & secure password hashing (bcrypt).
@@ -185,12 +176,12 @@ Prepared system for future ML integration.
 📊 Admin dashboards for login analytics.
 
 📜 Conclusion
-This prototype demonstrates a practical, explainable approach to adaptive authentication. It reduces friction for safe logins while strengthening protection for risky ones. The modular design makes it easy to extend with machine learning models and integrate with real-world identity systems.
+This prototype demonstrates a practical, explainable approach to adaptive authentication.
+It reduces friction for safe logins while strengthening protection for risky ones.
+Its modular design makes it ready for machine learning extensions and integration into real-world identity systems.
 
 👨‍💻 Author
 Ashutosh Kumar
-BS in Computer Science, IIT Patna
-📧 ashutosh_2312res778@iitp.ac.in
-🔗 GitHub Repo
-
+🎓 BS in Computer Science, IIT Patna
+📧 ashutosh_2312res77@iitp.ac.in
 
